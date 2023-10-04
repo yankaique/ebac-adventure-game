@@ -3,29 +3,44 @@ using System.Collections.Generic;
 using UnityEngine;
 using NaughtyAttributes;
 
-public class StateMachine : MonoBehaviour
+public class Test
 {
-    public enum States
+    public enum Teste2
     {
-        none,
-    }
 
-    public Dictionary<States, StateBase> dictionaryState;
+        NONE
+    }
+    public void NewTest()
+    {
+        StateMachine<Teste2> stateMachine = new StateMachine<Teste2>();
+        stateMachine.RegisterStates(Test.Teste2.NONE, new StateBase());
+    }
+}
+
+public class StateMachine<T> where T : System.Enum
+{
+
+    public Dictionary<T, StateBase> dictionaryState;
     public float timeToStart = 1f;
+
     private StateBase _currentState;
 
-    private void Awake()
+    public StateBase CurrentState
     {
-        dictionaryState = new Dictionary<States, StateBase>();
-        dictionaryState.Add(States.none, new StateBase());
-
-        SwitchState(States.none);
-
-        Invoke("StartGame", timeToStart);
+        get { return _currentState; }
     }
 
-    [Button]
-    public void SwitchState(States state)
+    public void Init()
+    {
+        dictionaryState = new Dictionary<T, StateBase>();
+    }
+
+    public void RegisterStates(T typeEnum, StateBase state)
+    {
+        dictionaryState.Add(typeEnum, state);
+    }
+
+    public void SwitchState(T state)
     {
         if (_currentState != null)
         {
@@ -36,13 +51,7 @@ public class StateMachine : MonoBehaviour
         _currentState.OnStateEnter();
     }
 
-    [Button]
-    private void StartGame()
-    {
-        SwitchState(States.none);
-    }
-
-    private void Update()
+    public void Update()
     {
         if (_currentState != null)
         {
