@@ -3,39 +3,42 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class StateBase
+namespace Ebac.StateMachine
 {
-    public virtual void OnStateEnter(object o = null)
+    public class StateBase
     {
-        Debug.Log("OnStateEnter");
-    }
+        public virtual void OnStateEnter(object o = null)
+        {
+            Debug.Log("OnStateEnter");
+        }
         
-    public virtual void OnStateStay()
-    {
-        Debug.Log("OnStateEnter");
+        public virtual void OnStateStay()
+        {
+            Debug.Log("OnStateEnter");
+        }
+
+        public virtual void OnStateExit()
+        {
+            Debug.Log("OnStateEnter");
+        }
     }
 
-    public virtual void OnStateExit()
+    public class StateRunning: StateBase
     {
-        Debug.Log("OnStateEnter");
-    }
-}
+        public override void OnStateEnter(object o = null)
+        {
+            base.OnStateEnter(o);
+        }
 
-public class StateRunning: StateBase
-{
-    public override void OnStateEnter(object o = null)
-    {
-        base.OnStateEnter(o);
-    }
+        public override void OnStateStay()
+        {
+            base.OnStateStay();
+        }
 
-    public override void OnStateStay()
-    {
-        base.OnStateStay();
-    }
-
-    public override void OnStateExit()
-    {
-        base.OnStateExit(); 
+        public override void OnStateExit()
+        {
+            base.OnStateExit(); 
+        }
     }
 }
 
