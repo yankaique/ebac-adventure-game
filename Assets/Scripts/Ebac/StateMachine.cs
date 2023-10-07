@@ -12,6 +12,7 @@ namespace Ebac.StateMachine
         public float timeToStart = 1f;
 
         private StateBase _currentState;
+        public string stateTag;
 
         public StateBase CurrentState
         {
@@ -28,7 +29,7 @@ namespace Ebac.StateMachine
             dictionaryState.Add(typeEnum, state);
         }
 
-        public void SwitchState(T state)
+        public void SwitchState(T state, object o = null)
         {
             if (_currentState != null)
             {
@@ -36,7 +37,8 @@ namespace Ebac.StateMachine
             }
 
             _currentState = dictionaryState[state];
-            _currentState.OnStateEnter();
+            _currentState.OnStateEnter(o);
+            stateTag = state.ToString();
         }
 
         public void Update()

@@ -2,7 +2,8 @@ using Ebac.core.Singleton;
 using Ebac.StateMachine;
 using Movement;
 using NaughtyAttributes;
-using System.Diagnostics;
+using System.Collections;
+using UnityEngine;
 
 public class MovementManager : Singleton<MovementManager>
 {
@@ -14,6 +15,7 @@ public class MovementManager : Singleton<MovementManager>
     }
 
     public StateMachine<MovementStates> stateMachine;
+    public GameObject gameObject;
 
     private void Start()
     {
@@ -34,7 +36,7 @@ public class MovementManager : Singleton<MovementManager>
     [Button]
     public void ChangeToJump()
     {
-        stateMachine.SwitchState(MovementStates.JUMP);
+        stateMachine.SwitchState(MovementStates.JUMP, gameObject);
     } 
 
     [Button]
@@ -46,10 +48,32 @@ public class MovementManager : Singleton<MovementManager>
     [Button]
     public void ChangeToMovement()
     {
-        stateMachine.SwitchState(MovementStates.MOVEMENT);
+        stateMachine.SwitchState(MovementStates.MOVEMENT, gameObject);
     }
 
     private void Update()
     {
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            ChangeToJump();
+        }
+
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            ChangeToMovement();
+        }
+
+        if (stateMachine.stateTag != "IDLE")
+        {
+            StartCoroutine(ChangeToIdle());
+        }
+
+    }
+
+    private IEnumerator ChangeToIdle()
+    {
+        yield return new WaitForSeconds(1f);
+
+        ChangeToIDLE();
     }
 }

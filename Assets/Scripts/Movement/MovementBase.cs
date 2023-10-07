@@ -26,32 +26,47 @@ namespace Movement
 
     public class MovementState : StateBase
     {
+        private GameObject _gameObject;
+
         public override void OnStateEnter(object o = null)
         {
             base.OnStateEnter(o);
-            Debug.Log("MOVEMENT");
+            if (o != null && o is GameObject)
+            {
+                _gameObject = (GameObject)o;
+
+                Vector3 currentPosition = _gameObject.transform.position;
+
+                currentPosition.z += 5f;
+
+                _gameObject.transform.position = currentPosition;
+            }
         }
 
         public override void OnStateStay()
         {
-            base.OnStateStay();
-            Debug.Log("Minhau");
-
         }
 
         public override void OnStateExit()
         {
-            base.OnStateExit();
-            Debug.Log("MOVEMENT");
         }
     }
 
     public class JumpState : StateBase
     {
+        private GameObject _gameObject;
         public override void OnStateEnter(object o = null)
         {
-            base.OnStateEnter(o);
-            Debug.Log("JUMP");
+            if(o != null && o is GameObject)
+            {
+                _gameObject = (GameObject)o;
+
+                Vector3 currentPosition = _gameObject.transform.position; 
+
+                currentPosition.y = 2f;
+
+                _gameObject.transform.position = currentPosition;
+            }
         }
 
         public override void OnStateStay()
@@ -63,8 +78,14 @@ namespace Movement
 
         public override void OnStateExit()
         {
-            base.OnStateExit();
-            Debug.Log("JUMP");
+            if (_gameObject != null)
+            {
+                Vector3 currentPosition = _gameObject.transform.position;
+
+                currentPosition.y = 0;
+
+                _gameObject.transform.position = currentPosition;
+            }
         }
     }
 }
