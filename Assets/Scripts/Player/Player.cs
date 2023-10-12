@@ -11,15 +11,22 @@ public class Player : MonoBehaviour
     public float turnSpeed = 80f;
     public float gravity = -9.8f;
 
+    public float jumpSpeed = 15f;
+
     private float _vSpeed = 0f;
     void Update()
     {
         // adicionando rotação ao personagem
+        var inputAxisVertical = Input.GetAxis("Vertical");
         transform.Rotate(0, Input.GetAxis("Horizontal") * turnSpeed * Time.deltaTime, 0);
 
-        var inputAxisVertical = Input.GetAxis("Vertical");
         // Usando eixo vertical pra ir pra frente e pra trás
         var speedVector = transform.forward * inputAxisVertical * speed;
+
+        if(Input.GetKeyDown(KeyCode.Space) && characterController.isGrounded)
+        {
+            _vSpeed = jumpSpeed;
+        }
 
         _vSpeed += gravity * Time.deltaTime;
         speedVector.y = _vSpeed;
