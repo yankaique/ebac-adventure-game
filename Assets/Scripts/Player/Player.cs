@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public Animator animator;
+
     public CharacterController characterController;
-    public float speed = 1f;
-    public float turnSpeed = 1f;
+    public float speed = 75f;
+    public float turnSpeed = 80f;
     public float gravity = -9.8f;
 
     private float _vSpeed = 0f;
@@ -15,12 +17,15 @@ public class Player : MonoBehaviour
         // adicionando rotação ao personagem
         transform.Rotate(0, Input.GetAxis("Horizontal") * turnSpeed * Time.deltaTime, 0);
 
+        var inputAxisVertical = Input.GetAxis("Vertical");
         // Usando eixo vertical pra ir pra frente e pra trás
-        var speedVector = transform.forward * Input.GetAxis("Vertical") * speed;
+        var speedVector = transform.forward * inputAxisVertical * speed;
 
         _vSpeed += gravity * Time.deltaTime;
         speedVector.y = _vSpeed;
 
         characterController.Move(speedVector * Time.deltaTime);
+
+        animator.SetBool("Run", inputAxisVertical != 0);
     }
 }
