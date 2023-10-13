@@ -9,30 +9,46 @@ public class Player : MonoBehaviour
     public CharacterController characterController;
     public float speed = 75f;
     public float turnSpeed = 80f;
-    public float gravity = -9.8f;
+    public float gravity = 9.8f;
 
     public float jumpSpeed = 15f;
+
+    [Header("Run")]
+    public KeyCode KeyRun = KeyCode.LeftShift;
+    public float speedRun = 1.5f;
 
     private float _vSpeed = 0f;
     void Update()
     {
         // adicionando rotação ao personagem
-        var inputAxisVertical = Input.GetAxis("Vertical");
         transform.Rotate(0, Input.GetAxis("Horizontal") * turnSpeed * Time.deltaTime, 0);
 
+        var inputAxisVertical = Input.GetAxis("Vertical");
         // Usando eixo vertical pra ir pra frente e pra trás
         var speedVector = transform.forward * inputAxisVertical * speed;
 
-        if(Input.GetKeyDown(KeyCode.Space) && characterController.isGrounded)
+        if (Input.GetKeyDown(KeyCode.Space) && characterController.isGrounded)
         {
             _vSpeed = jumpSpeed;
         }
+        var isWalking = inputAxisVertical != 0;
 
-        _vSpeed += gravity * Time.deltaTime;
+        if (isWalking && Input.GetKeyDown(KeyRun))
+        {
+            speedVector *= speedRun;
+            animator.speed = speedRun;
+        } else
+        {
+            animator.speed = 1;
+
+        }
+
+
+        _vSpeed -= gravity * Time.deltaTime;
         speedVector.y = _vSpeed;
 
         characterController.Move(speedVector * Time.deltaTime);
 
-        animator.SetBool("Run", inputAxisVertical != 0);
+        animator.SetBool("Run", isWalking);
     }
 }
