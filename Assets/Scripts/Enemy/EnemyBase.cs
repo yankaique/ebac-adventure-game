@@ -1,45 +1,78 @@
+using Animation;
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 
-public class EnemyBase : MonoBehaviour
+namespace Enemy
 {
-    public float startLife;
-
-    private float _currentLife;
-
-    private void Awake()
+    public class EnemyBase : MonoBehaviour
     {
-        
-    }
+        public float startLife;
 
-    protected void ResetLife()
-    {
-        _currentLife = startLife;
-    }
+        [SerializeField] private float _currentLife;
 
-    protected virtual void Init()
-    {
-        ResetLife();
-    }
+        [Header("Animations")]
+        public float startAnimationDuration = .2f;
+        public Ease startAnimationEase = Ease.OutBack;
+        public bool startWithAnimation = true;
+        [SerializeField] private AnimationBase _animationBase;
 
-    protected virtual void Kill()
-    {
-        OnKill();
-    }
-
-    protected virtual void OnKill()
-    {
-        Destroy(gameObject);
-    }
-
-    public void OnDamage(float damage)
-    {
-        _currentLife -= damage;
-
-        if(_currentLife <= 0 )
+        private void Awake()
         {
-            Kill();
+            BornAnimation();
+        }
+
+        protected void ResetLife()
+        {
+            _currentLife = startLife;
+        }
+
+        protected virtual void Init()
+        {
+            ResetLife();
+        }
+
+        protected virtual void Kill()
+        {
+            OnKill();
+        }
+
+        protected virtual void OnKill()
+        {
+            Destroy(gameObject, 3f);
+            PlayAnimationByTrigger(AnimationType.DEATH);
+        }
+
+        public void OnDamage(float damage)
+        {
+            _currentLife -= damage;
+
+            if(_currentLife <= 0 )
+            {
+                Kill();
+            }
+        }
+
+        #region Animation
+            private void BornAnimation()
+        {
+            transform.DOScale(0, startAnimationDuration).SetEase(startAnimationEase).From();
+        }
+
+        public void PlayAnimationByTrigger(AnimationType animationType)
+        {
+            _animationBase.PlayAnimationByTrigger(animationType);
+        }
+        #endregion
+
+        private void Update()
+        {
+            if(Input.GetKeyDown(KeyCode.Q))
+            {
+                OnDamage(5);
+            }
         }
     }
 }
