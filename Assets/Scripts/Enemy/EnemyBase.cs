@@ -21,7 +21,7 @@ namespace Enemy
 
         private void Awake()
         {
-            BornAnimation();
+            Init();
         }
 
         protected void ResetLife()
@@ -32,6 +32,10 @@ namespace Enemy
         protected virtual void Init()
         {
             ResetLife();
+
+            if(startWithAnimation) { 
+                BornAnimation();
+            }
         }
 
         protected virtual void Kill()
