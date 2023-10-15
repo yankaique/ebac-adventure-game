@@ -63,6 +63,9 @@ namespace Enemy
             {
                 flashColor.Flash();
             }
+
+            //transform.position -= transform.forward;
+
             _currentLife -= damage;
 
             if(_currentLife <= 0 )
@@ -94,6 +97,12 @@ namespace Enemy
         public void Damage(float damage)
         {
             OnDamage(damage);
+        }
+        
+        public void Damage(float damage, Vector3 direction)
+        {
+            OnDamage(damage);
+            transform.DOMove(transform.position - direction, .1f);
         }
     }
 }

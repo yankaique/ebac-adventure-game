@@ -25,6 +25,10 @@ public class ProjectileBase : MonoBehaviour
 
         if (damageable != null)
         {
+            Vector3 dir = collision.transform.position - transform.position;
+            dir = -dir.normalized;
+            dir.y = 0;
+
             damageable.Damage(damageAmount);
             Destroy(gameObject);
         }
