@@ -884,6 +884,7 @@ GameObject:
   - component: {fileID: 6983442274928476050}
   - component: {fileID: 7443898874300591051}
   - component: {fileID: 6943764450354678979}
+  - component: {fileID: 2484370106256142171}
   m_Layer: 0
   m_Name: PFB_MonsterSlime_01
   m_TagString: Untagged
@@ -1000,3 +1001,18 @@ MonoBehaviour:
     trigger: Death
   - animationType: 4
     trigger: Run
+--- !u!114 &2484370106256142171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8929186499503660615}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3384ddfec87c6214f9e71c79c3d2ea81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meshRenderer: {fileID: 6983442274928476050}
+  color: {r: 1, g: 0, b: 0, a: 1}
+  duration: 0.1
