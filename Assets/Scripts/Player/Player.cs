@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IDamageable
 {
     public Animator animator;
 
@@ -18,6 +18,22 @@ public class Player : MonoBehaviour
     public float speedRun = 1.5f;
 
     private float _vSpeed = 0f;
+
+    [Header("Flash")]
+    public List<FlashColor> flashColors;
+
+    #region Life
+    public void Damage(float damage)
+    {
+        flashColors.ForEach(color => color.Flash());
+    }
+
+    public void Damage(float damage, Vector3 direction)
+    {
+        Damage(damage);
+    }
+    #endregion
+
     void Update()
     {
         // adicionando rotação ao personagem

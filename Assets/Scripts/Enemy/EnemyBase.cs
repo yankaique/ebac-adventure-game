@@ -23,9 +23,17 @@ namespace Enemy
         public bool startWithAnimation = true;
         [SerializeField] private AnimationBase _animationBase;
 
+        public bool lookAtPlayer = false;
+        private Player _player;
+
         private void Awake()
         {
             Init();
+        }
+
+        private void Start()
+        {
+            _player = GameObject.FindObjectOfType<Player>();
         }
 
         protected void ResetLife()
@@ -86,11 +94,11 @@ namespace Enemy
         }
         #endregion
 
-        private void Update()
+        public virtual void Update()
         {
-            if(Input.GetKeyDown(KeyCode.Q))
+            if(lookAtPlayer)
             {
-                OnDamage(5);
+                transform.LookAt(_player.transform.position);
             }
         }
 
@@ -104,5 +112,15 @@ namespace Enemy
             OnDamage(damage);
             transform.DOMove(transform.position - direction, .1f);
         }
+        public void OnCollisionEnter(Collision collision)
+        {
+            Player p = collision.transform.GetComponent<Player>();
+
+            if(p != null)
+            {
+                p.Damage(1);
+            }
+        }
     }
+
 }
