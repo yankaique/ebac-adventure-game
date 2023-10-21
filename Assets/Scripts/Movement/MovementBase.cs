@@ -5,7 +5,7 @@ namespace Movement
 {
     public class IdleState : StateBase
     {
-        public override void OnStateEnter(object o = null)
+        public override void OnStateEnter(params object[] o)
         {
             base.OnStateEnter(o);
             Debug.Log("IDLE");
@@ -28,12 +28,12 @@ namespace Movement
     {
         private GameObject _gameObject;
 
-        public override void OnStateEnter(object o = null)
+        public override void OnStateEnter(params object[] o)
         {
             base.OnStateEnter(o);
             if (o != null && o is GameObject)
             {
-                _gameObject = (GameObject)o;
+                _gameObject = (GameObject)o[0];
 
                 Vector3 currentPosition = _gameObject.transform.position;
 
@@ -55,11 +55,11 @@ namespace Movement
     public class JumpState : StateBase
     {
         private GameObject _gameObject;
-        public override void OnStateEnter(object o = null)
+        public override void OnStateEnter(params object[] o)
         {
             if(o != null && o is GameObject)
             {
-                _gameObject = (GameObject)o;
+                _gameObject = (GameObject)o[0];
 
                 Vector3 currentPosition = _gameObject.transform.position; 
 
