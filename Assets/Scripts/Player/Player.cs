@@ -57,8 +57,24 @@ public class Player : MonoBehaviour //, IDamageable
         {
             _alive = false;
             animator.SetTrigger("Death");
-            colliders.ForEach(collider => collider.enabled = false);
+            
+            Invoke(nameof(Revive), 3f);
+            Invoke(nameof(TurnOnColliders), 3f);
         }
+    }
+
+    private void TurnOnColliders()
+    {
+        colliders.ForEach(collider => collider.enabled = false);
+    }
+
+    private void Revive()
+    {
+        _alive = true;
+        healthBase.ResetLife();
+        animator.SetTrigger("Revive");
+        colliders.ForEach(collider => collider.enabled = true);
+        Respawn();
     }
 
     void Update()
@@ -93,5 +109,14 @@ public class Player : MonoBehaviour //, IDamageable
         characterController.Move(speedVector * Time.deltaTime);
 
         animator.SetBool("Run", isWalking);
+    }
+
+    [NaughtyAttributes.Button]
+    public void Respawn()
+    {
+        if (CheckPointManager.Instance.HasCheckPoint())
+        {
+            transform.position = CheckPointManager.Instance.GetPositionToRespawnPlayerFromLastCheckPoint();
+        }
     }
 }
