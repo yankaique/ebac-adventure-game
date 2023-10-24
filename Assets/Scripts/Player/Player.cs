@@ -24,7 +24,7 @@ public class Player : MonoBehaviour //, IDamageable
 
     [Header("Health")]
     public HealthBase healthBase;
-
+    
     private bool _alive = true;
 
     private void Awake()
