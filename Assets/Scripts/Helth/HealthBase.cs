@@ -9,6 +9,8 @@ public class HealthBase : MonoBehaviour
     public bool destroyOnKill = false;
     [SerializeField] private float _currentLife;
 
+    public List<UIGunUpdater> uIGunUpdater;
+
     public Action<HealthBase> OnDamage;
     public Action<HealthBase> OnKill;
 
@@ -34,7 +36,6 @@ public class HealthBase : MonoBehaviour
         {
             Destroy(gameObject, 3f);
         }
-
         OnKill?.Invoke(this);
     }
 
@@ -46,9 +47,18 @@ public class HealthBase : MonoBehaviour
         {
             Kill();
         }
-
+        Updateui();
         OnDamage?.Invoke(this);
     }
+
+    private void Updateui()
+    {
+        if(uIGunUpdater  != null)
+        {
+            uIGunUpdater.ForEach(i => i.UpdateValue((float)_currentLife / startLife));
+        }
+    }
+
     [NaughtyAttributes.Button]
     public void DebugDamage()
     {

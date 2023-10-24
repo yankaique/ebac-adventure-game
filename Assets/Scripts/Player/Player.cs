@@ -1,9 +1,9 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour //, IDamageable
 {
+    public List<Collider> colliders;
     public Animator animator;
 
     public CharacterController characterController;
@@ -25,10 +25,13 @@ public class Player : MonoBehaviour //, IDamageable
     [Header("Health")]
     public HealthBase healthBase;
 
+    private bool _alive = true;
+
     private void Awake()
     {
         OnValidate();
         healthBase.OnDamage += Damage;
+        healthBase.OnKill += OnKill;
     }
 
     private void OnValidate()
@@ -47,6 +50,16 @@ public class Player : MonoBehaviour //, IDamageable
         //Damage(damage);
     }
     #endregion
+
+    private void OnKill(HealthBase h)
+    {
+        if(_alive)
+        {
+            _alive = false;
+            animator.SetTrigger("Death");
+            colliders.ForEach(collider => collider.enabled = false);
+        }
+    }
 
     void Update()
     {
