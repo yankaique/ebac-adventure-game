@@ -1,8 +1,8 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour, IDamageable
+public class Player : MonoBehaviour //, IDamageable
 {
     public Animator animator;
 
@@ -22,15 +22,29 @@ public class Player : MonoBehaviour, IDamageable
     [Header("Flash")]
     public List<FlashColor> flashColors;
 
+    [Header("Health")]
+    public HealthBase healthBase;
+
+    private void Awake()
+    {
+        OnValidate();
+        healthBase.OnDamage += Damage;
+    }
+
+    private void OnValidate()
+    {
+        if(healthBase == null) healthBase = GetComponent<HealthBase>();
+    }
+
     #region Life
-    public void Damage(float damage)
+    public void Damage(HealthBase h)
     {
         flashColors.ForEach(color => color.Flash());
     }
 
     public void Damage(float damage, Vector3 direction)
     {
-        Damage(damage);
+        //Damage(damage);
     }
     #endregion
 
