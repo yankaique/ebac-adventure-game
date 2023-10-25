@@ -34,8 +34,6 @@ namespace Boss
 
         public HealthBase health;
 
-
-
         private void Awake()
         {
             Init();
@@ -51,6 +49,8 @@ namespace Boss
             _stateMachine.RegisterStates(BossAction.WALK, new BossStateWalk());
             _stateMachine.RegisterStates(BossAction.ATTACK, new BossStateAttack());
             _stateMachine.RegisterStates(BossAction.DEATH, new BossStateDeath());
+
+            GoToRandomPoint();
         }
 
         private void OnBosKill(HealthBase h)
@@ -82,18 +82,22 @@ namespace Boss
         #region Movement
         public void GoToRandomPoint(Action onArrive = null)
         {
-            StartCoroutine(GoToPointCoroutine(waypoints[UnityEngine.Random.Range(0, waypoints.Count)], onArrive));
+            int randomIndex = UnityEngine.Random.Range(0, waypoints.Count);
+            Transform randomWaypoint = waypoints[randomIndex];
+            StartCoroutine(GoToPointCoroutine(randomWaypoint, onArrive));
         }
 
         IEnumerator GoToPointCoroutine(Transform t, Action onArrive = null)
         {
-            while (Vector3.Distance(transform.position, t.position) > 1f)
+            Vector3 targetPosition = new Vector3(t.position.x, transform.position.y, t.position.z);
+
+            while (Vector3.Distance(transform.position, targetPosition) > 1f)
             {
-                transform.position = Vector3.MoveTowards(transform.position, t.position, Time.deltaTime * speed);
+                transform.position = Vector3.MoveTowards(transform.position, targetPosition, Time.deltaTime * speed);
                 yield return new WaitForEndOfFrame();
             }
 
-            if(onArrive != null)
+            if (onArrive != null)
             {
                 onArrive.Invoke();
             }

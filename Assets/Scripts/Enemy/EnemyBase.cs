@@ -112,6 +112,7 @@ namespace Enemy
             OnDamage(damage);
             transform.DOMove(transform.position - direction, .1f);
         }
+
         public void OnCollisionEnter(Collision collision)
         {
             Player p = collision.transform.GetComponent<Player>();

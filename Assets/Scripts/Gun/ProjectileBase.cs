@@ -28,7 +28,6 @@ public class ProjectileBase : MonoBehaviour
             if(collision.transform.tag == t)
             {
                 var damageable = collision.transform.GetComponent<IDamageable>();
-
                 if (damageable != null)
                 {
                     Vector3 dir = collision.transform.position - transform.position;
