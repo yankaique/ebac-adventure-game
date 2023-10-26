@@ -25,7 +25,10 @@ public class CheckPointManager : Singleton<CheckPointManager>
     {
         var checkpoint = checkpoints.Find(i => i.key == lastCheckPointKey);
 
-        return checkpoint.transform.position;
+        Vector3 originalPosition = checkpoint.transform.position;
+        Vector3 offset = new Vector3(4f, 0f, 0f);
+
+        return originalPosition + offset;
     }
 
 

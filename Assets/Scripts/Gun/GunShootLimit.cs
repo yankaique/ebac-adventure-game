@@ -13,11 +13,6 @@ public class GunShootLimit : GunBase
     private float _currentShoots;
     private bool _recharging = false;
 
-    private void Awake()
-    {
-        GetAllUIs();
-    }
-
     protected override IEnumerator ShootCoroutine()
     {
         if(_recharging) yield break;
@@ -57,7 +52,7 @@ public class GunShootLimit : GunBase
         while(time < timeToRecharge)
         {
             time += Time.deltaTime;
-            uiGunUpdaters.ForEach(u => u.UpdateValue(time/timeToRecharge));
+            //uiGunUpdaters.ForEach(u => u.UpdateValue(time/timeToRecharge));
             yield return new WaitForEndOfFrame();
         }
 
@@ -68,10 +63,5 @@ public class GunShootLimit : GunBase
     private void UpdateUI()
     {
         uiGunUpdaters.ForEach(u => u.UpdateValue(maxShoot, _currentShoots));
-    }
-
-    private void GetAllUIs()
-    {
-        uiGunUpdaters = GameObject.FindObjectsOfType<UIGunUpdater>().ToList();
     }
 }
