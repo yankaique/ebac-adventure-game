@@ -11,7 +11,10 @@ namespace Enemy
         protected override void Init()
         {
            base.Init();
-           gunBase.StartShoot();
+            if(gunBase != null )
+            {
+                gunBase.StartShoot();
+            }
         }
     }
 }
