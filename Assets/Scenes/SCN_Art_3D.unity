@@ -3841,6 +3841,7 @@ GameObject:
   - component: {fileID: 656969082}
   - component: {fileID: 656969083}
   - component: {fileID: 656969084}
+  - component: {fileID: 656969085}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -3960,6 +3961,20 @@ MonoBehaviour:
   _currentLife: 0
   uIGunUpdater:
   - {fileID: 1188512018}
+--- !u!114 &656969085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 656969077}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38be612df5ed3744bb436c4f876f1e3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  virtualCamera: {fileID: 1482256980}
+  shakeTime: 3
 --- !u!1001 &667463279
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10267,7 +10282,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1482256979}
-  m_LocalRotation: {x: 0.17131153, y: 0.000000008476004, z: -0.000000001473825, w: 0.9852169}
+  m_LocalRotation: {x: 0.17131154, y: -0.000000008476014, z: 0.0000000014738267, w: 0.9852169}
   m_LocalPosition: {x: 419.68216, y: -5.20592, z: 37.63258}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

@@ -43,6 +43,7 @@ public class Player : MonoBehaviour //, IDamageable
     public void Damage(HealthBase h)
     {
         flashColors.ForEach(color => color.Flash());
+        ShakeCamera.Instance.Shake(3f, 3f, 3f);
         EffectsManager.Instance.ChangeVignette();
     }
 
