@@ -1,12 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
+using Item;
 using UnityEngine;
 
 public class ItemCollectableBase : MonoBehaviour
 {
+    public ItemType itemType;
+
     public string compareTag = "Player";
     public ParticleSystem particleSystem;
     public float timeToHideParticle = .3f;
+
+    public Collider itemCollider;
+
     public GameObject graphicItem;
     public AudioSource audioSource;
 
@@ -20,6 +24,7 @@ public class ItemCollectableBase : MonoBehaviour
     }
     protected virtual void Collect()
     {
+        if (itemCollider != null) itemCollider.enabled = false;
         if(graphicItem  != null)
         {
             graphicItem.SetActive(false);
@@ -45,6 +50,8 @@ public class ItemCollectableBase : MonoBehaviour
         {
             audioSource.Play();
         }
+
+        ItemManager.Instance.AddByType(itemType);
     }
 
     
