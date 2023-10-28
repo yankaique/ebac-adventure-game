@@ -27,6 +27,7 @@ public class HealthBase : MonoBehaviour
     public void ResetLife()
     {
         _currentLife = startLife;
+        Updateui();
     }
 
 

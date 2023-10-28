@@ -8,8 +8,7 @@ namespace Ebac.core.Singleton
     {
         public static T Instance;
 
-
-        private void Awake()
+        protected virtual void Awake()
         {
             if (Instance == null)
             {

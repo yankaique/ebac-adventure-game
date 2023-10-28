@@ -1,8 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Camera;
+using Ebac.core.Singleton;
 
-public class Player : MonoBehaviour //, IDamageable
+public class Player : Singleton<Player> //, IDamageable
 {
     public List<Collider> colliders;
     public Animator animator;
@@ -28,8 +29,9 @@ public class Player : MonoBehaviour //, IDamageable
     
     private bool _alive = true;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         OnValidate();
         healthBase.OnDamage += Damage;
         healthBase.OnKill += OnKill;
