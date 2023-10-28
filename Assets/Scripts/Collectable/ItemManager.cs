@@ -3,24 +3,66 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Ebac.core.Singleton;
-public class ItemManager : Singleton<ItemManager>
+
+namespace Item
 {
-    public SOInt coins;
-    public TextMeshProUGUI uiTextCoins;
-
-    private void Start()
+    public enum ItemType
     {
-        Reset();
-
+        COIN,
+        LIFE_PACK
     }
 
-    private void Reset()
+    public class ItemManager : Singleton<ItemManager>
     {
-        coins.Value = 0;
+        public List<ItemSetup> itemSetups;
+
+        private void Start()
+        {
+            Reset();
+
+        }
+
+        private void Reset()
+        {
+            foreach (var i in itemSetups)
+            {
+                i.soInt.value = 0;
+            }
+        }
+
+        public void AddByType(ItemType itemType, int amount =1)
+        {
+            if (amount < 0) return;
+            itemSetups.Find(i=> i.itemType  == itemType).soInt.value += amount;
+        }
+        
+        public void RemoveByType(ItemType itemType, int amount = -1)
+        {
+            if (amount > 0) return;
+
+            var item = itemSetups.Find(i=> i.itemType  == itemType);
+            item.soInt.value -= amount;
+
+            if( item.soInt.value < 0 ) item.soInt.value = 0;
+        }
+
+        [NaughtyAttributes.Button]
+        public void AddCoins(int amount = 1)
+        {
+           AddByType(ItemType.COIN, amount);
+        }
+
+        [NaughtyAttributes.Button]
+        public void AddLifePacks(int amount = 1)
+        {
+            AddByType(ItemType.LIFE_PACK, amount);
+        }
     }
 
-    public void AddCoins(int amount = 1)
+    [System.Serializable]
+    public class ItemSetup
     {
-        coins.Value += amount;
+        public ItemType itemType;
+        public SOInt soInt;
     }
 }

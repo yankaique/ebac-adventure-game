@@ -10,11 +10,11 @@ public class SOUIIntUpdate : MonoBehaviour
 
     private void Start()
     {
-        uiTextValue.text = soInt.Value.ToString();
+        uiTextValue.text = soInt.value.ToString();
     }
 
     private void Update()
     {
-        uiTextValue.text = soInt.Value.ToString();
+        uiTextValue.text = soInt.value.ToString();
     }
 }

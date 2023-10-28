@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu]
 public class SOInt : ScriptableObject
 {
-    public int Value;
+    public int value;
 
 
 }
