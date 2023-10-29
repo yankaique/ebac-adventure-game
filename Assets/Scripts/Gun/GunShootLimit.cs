@@ -24,7 +24,7 @@ public class GunShootLimit : GunBase
                 Shoot();
                 _currentShoots++;
                 CheckRecharge();
-                UpdateUI();
+                // UpdateUI();
                 yield return new WaitForSeconds(timeBetweenShoot);
             }
             
@@ -52,7 +52,6 @@ public class GunShootLimit : GunBase
         while(time < timeToRecharge)
         {
             time += Time.deltaTime;
-            //uiGunUpdaters.ForEach(u => u.UpdateValue(time/timeToRecharge));
             yield return new WaitForEndOfFrame();
         }
 

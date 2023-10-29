@@ -148,6 +148,7 @@ MonoBehaviour:
   speed: 50
   tagsToHit:
   - Enemy
+  - Tree
 --- !u!54 &3934676777350138989
 Rigidbody:
   m_ObjectHideFlags: 0
