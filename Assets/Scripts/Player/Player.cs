@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Camera;
 using Ebac.core.Singleton;
+using System.Collections;
 
 public class Player : Singleton<Player> //, IDamageable
 {
@@ -123,5 +124,19 @@ public class Player : Singleton<Player> //, IDamageable
         {
             transform.position = CheckPointManager.Instance.GetPositionToRespawnPlayerFromLastCheckPoint();
         }
+    }
+
+    public void ChangeSpeed(float speed, float duration)
+    {
+        StartCoroutine(ChangeSpeedCoroutine(speed, duration));
+    }
+
+    IEnumerator ChangeSpeedCoroutine(float localSpeed, float duration)
+    {
+        var defaultSpedd = speed;
+        speed = localSpeed;
+
+        yield return new WaitForSeconds(duration);
+        speed = defaultSpedd;
     }
 }
