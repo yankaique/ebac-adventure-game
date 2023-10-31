@@ -2,11 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cloth;
 
 public class HealthBase : MonoBehaviour, IDamageable
 {
     public float startLife;
     public bool destroyOnKill = false;
+    public float damageMultiply = 1f;
+
     [SerializeField] private float _currentLife;
 
     public List<UIGunUpdater> uIGunUpdater;
@@ -42,7 +45,7 @@ public class HealthBase : MonoBehaviour, IDamageable
 
     public void Damage(float damage = 1)
     {
-        _currentLife -= damage;
+        _currentLife -= damage * damageMultiply;
 
         if (_currentLife <= 0)
         {
@@ -70,5 +73,18 @@ public class HealthBase : MonoBehaviour, IDamageable
     public void Damage(float damage, Vector3 direction)
     {
         Damage(damage);
+    }
+
+    public void ChangeDamageMultiply(float damage, float duration)
+    {
+        StartCoroutine(ChangeDamageMultiplyCoroutine(damage, duration));
+
+    }
+
+    IEnumerator ChangeDamageMultiplyCoroutine(float damageMultiply, float duration)
+    {
+        this.damageMultiply = damageMultiply;
+        yield return new WaitForSeconds(duration);
+        this.damageMultiply = 1;
     }
 }
