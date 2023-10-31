@@ -422,6 +422,53 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8711277840774425792, guid: de26322d17bf8df49a74450be4c0ebe5, type: 3}
   m_PrefabInstance: {fileID: 40585165}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &49926351
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 49926353}
+  - component: {fileID: 49926352}
+  m_Layer: 0
+  m_Name: ClothManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &49926352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 49926351}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99102047a6aeb2f4badfadf58f4cc25a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clothSetups:
+  - clothType: 0
+    texture: {fileID: 0}
+--- !u!4 &49926353
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 49926351}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 430.9548, y: -16.763847, z: 58.17871}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &66745332
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4452,6 +4499,7 @@ MonoBehaviour:
   - {fileID: 826183395}
   - {fileID: 1360020751}
   healthBase: {fileID: 656969084}
+  _clothChanger: {fileID: 1755247083}
 --- !u!4 &656969081
 Transform:
   m_ObjectHideFlags: 0
@@ -8775,8 +8823,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_NoiseProfile: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
   m_PivotOffset: {x: 0, y: 0, z: 0}
-  m_AmplitudeGain: 1
-  m_FrequencyGain: 1
+  m_AmplitudeGain: 0
+  m_FrequencyGain: 0
   mNoiseOffsets: {x: 542.54315, y: 876.8356, z: 367.9995}
 --- !u!1 &1179709625
 GameObject:
@@ -14666,8 +14714,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1776093419}
-  - component: {fileID: 1776093418}
   - component: {fileID: 1776093417}
+  - component: {fileID: 1776093420}
   m_Layer: 0
   m_Name: ClothItemSpeed
   m_TagString: Untagged
@@ -14683,25 +14731,11 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1776093416}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 2.02
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1776093418
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1776093416}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82bd598bff5438d4cab84097e64a03fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  clothType: 0
-  compareTag: Player
 --- !u!4 &1776093419
 Transform:
   m_ObjectHideFlags: 0
@@ -14718,6 +14752,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1776093420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1776093416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82bd598bff5438d4cab84097e64a03fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clothType: 0
+  compareTag: Player
+  duration: 2
+  targetSpeed: 50
 --- !u!1 &1777117563
 GameObject:
   m_ObjectHideFlags: 0
