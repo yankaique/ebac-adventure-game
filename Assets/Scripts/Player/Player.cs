@@ -33,7 +33,9 @@ public class Player : Singleton<Player> //, IDamageable
     [Space]
     [SerializeField] private ClothChanger _clothChanger;
 
+
     private bool _alive = true;
+    private bool _jumping = false;
 
     protected override void Awake()
     {
@@ -97,10 +99,28 @@ public class Player : Singleton<Player> //, IDamageable
         // Usando eixo vertical pra ir pra frente e pra trás
         var speedVector = transform.forward * inputAxisVertical * speed;
 
-        if (Input.GetKeyDown(KeyCode.Space) && characterController.isGrounded)
+        if(characterController.isGrounded)
         {
-            _vSpeed = jumpSpeed;
+            if (_jumping)
+            {
+                _jumping = false;
+                animator.SetTrigger("Landing");
+            }
+            _vSpeed = 0;
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                
+
+                _vSpeed = jumpSpeed;
+
+                if(!_jumping)
+                {
+                    _jumping = true;
+                    animator.SetTrigger("Jump");
+                }
+            }
         }
+
         var isWalking = inputAxisVertical != 0;
 
         if (isWalking && Input.GetKeyDown(KeyRun))
