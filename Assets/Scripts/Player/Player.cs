@@ -86,7 +86,7 @@ public class Player : Singleton<Player> //, IDamageable
         _alive = true;
         healthBase.ResetLife();
         animator.SetTrigger("Revive");
-        colliders.ForEach(collider => collider.enabled = true);
+        // colliders.ForEach(collider => collider.enabled = true);
         Respawn();
     }
 

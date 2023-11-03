@@ -38,11 +38,7 @@ public class SaveManager : Singleton<SaveManager>
     [NaughtyAttributes.Button]
     private void Save()
     {
-        SaveSetup setup = new SaveSetup();
-        setup.lastLevel = 2;
-        setup.playerName = "Yan";
-
-        string setupToJson = JsonUtility.ToJson(setup, true);
+        string setupToJson = JsonUtility.ToJson(_saveSetup, true);
         SaveFile(setupToJson);
     }
 
