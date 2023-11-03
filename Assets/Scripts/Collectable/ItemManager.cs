@@ -14,12 +14,13 @@ namespace Item
 
     public class ItemManager : Singleton<ItemManager>
     {
+       
         public List<ItemSetup> itemSetups;
 
         private void Start()
         {
             Reset();
-
+            LoadItemsFrontSave();
         }
 
         private void Reset()
@@ -33,6 +34,21 @@ namespace Item
         public ItemSetup GetItemByType(ItemType itemType)
         {
             return itemSetups.Find(i => i.itemType == itemType);
+        }
+
+        private void LoadItemsFrontSave()
+        {
+            try
+            {
+
+               AddByType(ItemType.COIN, SaveManager.Instance.Setup.coins);
+               AddByType(ItemType.LIFE_PACK, SaveManager.Instance.Setup.health);
+            }
+            catch
+            {
+                AddByType(ItemType.COIN, 0);
+                AddByType(ItemType.LIFE_PACK, 0);
+            }
         }
 
         public void AddByType(ItemType itemType, int amount =1)
