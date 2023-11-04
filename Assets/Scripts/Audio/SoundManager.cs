@@ -1,8 +1,9 @@
+using Ebac.core.Singleton;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SoundManager : MonoBehaviour
+public class SoundManager : Singleton<SoundManager>
 {
     public List<MusicSetup> musicSetups;
     public List<SFXSetup> sfxSetups;
