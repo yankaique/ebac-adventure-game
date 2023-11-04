@@ -8942,6 +8942,51 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &609781574
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 609781575}
+  - component: {fileID: 609781576}
+  m_Layer: 0
+  m_Name: SFXPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &609781575
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 609781574}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1762487257}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &609781576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 609781574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6182a39bf81fa1f48a2fa002b468cfc0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolSize: 10
 --- !u!1 &626176234 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 269244889501274588, guid: e70fcda253eb77f438367bfee31e1477, type: 3}
@@ -12937,11 +12982,6 @@ SpriteRenderer:
 --- !u!4 &1011059230 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3548190921812909380, guid: 669da19096f92e44eb3579a39c4343e7, type: 3}
-  m_PrefabInstance: {fileID: 3548190921741768538}
-  m_PrefabAsset: {fileID: 0}
---- !u!135 &1011059231 stripped
-SphereCollider:
-  m_CorrespondingSourceObject: {fileID: 3548190921812909381, guid: 669da19096f92e44eb3579a39c4343e7, type: 3}
   m_PrefabInstance: {fileID: 3548190921741768538}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1013537837
@@ -24464,6 +24504,7 @@ Transform:
   m_Children:
   - {fileID: 1644677951}
   - {fileID: 2117883252}
+  - {fileID: 609781575}
   m_Father: {fileID: 0}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -29227,10 +29268,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: PFB_Coin
       objectReference: {fileID: 0}
-    - target: {fileID: 3548190921812909434, guid: 669da19096f92e44eb3579a39c4343e7, type: 3}
-      propertyPath: itemCollider
-      value: 
-      objectReference: {fileID: 1011059231}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 669da19096f92e44eb3579a39c4343e7, type: 3}
 --- !u!212 &3666576867541740890
@@ -29596,6 +29633,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1762487257}
     m_Modifications:
+    - target: {fileID: 4029022389352069692, guid: e68c17e6623363847ae19876d8a3d4fa, type: 3}
+      propertyPath: sfxSetups.Array.data[0].sfxType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4029022389352069692, guid: e68c17e6623363847ae19876d8a3d4fa, type: 3}
+      propertyPath: sfxSetups.Array.data[1].sfxType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4029022389352069692, guid: e68c17e6623363847ae19876d8a3d4fa, type: 3}
+      propertyPath: sfxSetups.Array.data[2].sfxType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4029022389352069692, guid: e68c17e6623363847ae19876d8a3d4fa, type: 3}
+      propertyPath: sfxSetups.Array.data[0].audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: f126dd7aa600246c29bc92e20ceab0e7, type: 3}
     - target: {fileID: 4029022389352069692, guid: e68c17e6623363847ae19876d8a3d4fa, type: 3}
       propertyPath: musicSetups.Array.data[2].audioClip
       value: 
