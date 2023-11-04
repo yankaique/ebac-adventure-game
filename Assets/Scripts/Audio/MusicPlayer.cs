@@ -1,8 +1,9 @@
+using Ebac.core.Singleton;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MusicPlayer : MonoBehaviour
+public class MusicPlayer : Singleton<MusicPlayer>
 {
     public MusicType musicType;
     public AudioSource audioSource;
@@ -14,10 +15,17 @@ public class MusicPlayer : MonoBehaviour
         Play();
     }
 
-    private void Play()
+    public void Play()
     {
         _currentMusicSetup = SoundManager.Instance.GetMusicByType(musicType);
         audioSource.clip = _currentMusicSetup.audioClip;
         audioSource.Play();
+    }  
+    
+    public void Stop()
+    {
+        _currentMusicSetup = SoundManager.Instance.GetMusicByType(musicType);
+        audioSource.clip = _currentMusicSetup.audioClip;
+        audioSource.Stop();
     }
 }
