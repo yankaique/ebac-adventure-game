@@ -33,6 +33,9 @@ public class Player : Singleton<Player> //, IDamageable
     [Space]
     [SerializeField] private ClothChanger _clothChanger;
 
+    [Space]
+    public SFXType sfxRespawn;
+
 
     private bool _alive = true;
     private bool _jumping = false;
@@ -43,6 +46,16 @@ public class Player : Singleton<Player> //, IDamageable
         OnValidate();
         healthBase.OnDamage += Damage;
         healthBase.OnKill += OnKill;
+    }
+
+    private void Start()
+    {
+        PlaySFX();
+    }
+
+    public void PlaySFX()
+    {
+        SFXPool.Instance.Play(sfxRespawn);
     }
 
     private void OnValidate()
@@ -86,7 +99,7 @@ public class Player : Singleton<Player> //, IDamageable
         _alive = true;
         healthBase.ResetLife();
         animator.SetTrigger("Revive");
-        // colliders.ForEach(collider => collider.enabled = true);
+        colliders.ForEach(collider => collider.enabled = true);
         Respawn();
     }
 

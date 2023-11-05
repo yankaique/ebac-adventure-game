@@ -22,12 +22,8 @@ public class EndGame : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Player p = other.transform.GetComponent<Player>();
-        Debug.Log("Entrou");
-
         if (!_endGame && p != null)
         {
-            Debug.Log("Entrou2");
-
             ShowEndGame(); 
         }
     }

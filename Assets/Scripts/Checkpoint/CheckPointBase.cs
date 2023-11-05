@@ -6,6 +6,7 @@ public class CheckPointBase : MonoBehaviour
 {
     public MeshRenderer meshRenderer;
     public int key = 01;
+    public SFXType sfxType;
 
     private bool _checkPointActived = false;
 
@@ -23,13 +24,15 @@ public class CheckPointBase : MonoBehaviour
         TurnItOn();
     }
 
-    [NaughtyAttributes.Button]
+    public void PlaySFX()
+    {
+        SFXPool.Instance.Play(sfxType);
+    }
     public void TurnItOn()
     {
+        PlaySFX();
         meshRenderer.material.SetColor("_EmissionColor", Color.white);
     } 
-
-    [NaughtyAttributes.Button]
 
     public void TurnItOff()
     {

@@ -7,14 +7,13 @@ public class CheckPointManager : Singleton<CheckPointManager>
 {
     public int lastCheckPointKey = 0;
     public List<CheckPointBase> checkpoints;
-    protected override void Awake()
+    public void Start()
     {
-        base.Awake();
         lastCheckPointKey = SaveManager.Instance.Setup.checkPointKey;
 
         if(HasCheckPoint())
         {
-            Player.Instance.Respawn();
+           Player.Instance.Respawn();
         }
     }
 
